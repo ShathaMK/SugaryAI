@@ -149,6 +149,29 @@ class CameraManager: NSObject{
         guard connection.isVideoRotationAngleSupported(angle) else { return }
         connection.videoRotationAngle = angle
     }
+    // Function to turn the flash ON and OFF simply by tapping the flash icon
+    func toggleFlash() {
+        guard let device = AVCaptureDevice.default(for: .video) else {
+            print("No video device available")
+            return
+        }
+        guard device.hasTorch else {
+            print("Device has no torch")
+            return
+        }
+
+        do {
+            try device.lockForConfiguration()
+            if device.torchMode == .on {
+                device.torchMode = .off
+            } else {
+                try device.setTorchModeOn(level: 1.0)
+            }
+            device.unlockForConfiguration()
+        } catch {
+            print("Error toggling flash: \(error)")
+        }
+    }
    }// End of CameraManger class
 
 // Extension to receive the various buffer frames from the camera

@@ -11,7 +11,7 @@ struct TestView: View {
     @State private var viewModel = CameraViewModel()
     
     var body: some View {
-        CameraView(image: $viewModel.currentFrame)
+        CameraView()
             .ignoresSafeArea()
 
     }

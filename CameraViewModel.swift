@@ -14,9 +14,10 @@ import Observation
 // it publishes the changes to CameraView using the Observation framework it allows us to publish the current frame in real-time
 @Observable
 class CameraViewModel {
-    
+    // to track flash state if you want UI feedback
+    var isFlashOn: Bool = false
     var currentFrame: CGImage?
-    private let cameraManger = CameraManager()
+    private let cameraManager = CameraManager()
     init(){
         Task {
             await handleCameraPreview()
@@ -25,11 +26,18 @@ class CameraViewModel {
     
     // Handle the update of AsyncStream and move the updates of the published variables to the MainActor updating the UI
     func handleCameraPreview() async {
-        for await image in cameraManger.previewStream {
+        for await image in cameraManager.previewStream {
             Task { @MainActor in
                 currentFrame = image
             }
         }
         
     }
+    
+    // Expose the toggle flash functionality to the view
+       func toggleFlash() {
+           cameraManager.toggleFlash()
+           // Optionally update the flash state here for UI feedback
+           isFlashOn.toggle()
+       }
 }
