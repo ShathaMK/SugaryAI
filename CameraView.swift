@@ -10,12 +10,14 @@
 import SwiftUI
 
 struct CameraView: View {
-    @Binding var image: CGImage?
-    @State var isFlashOn: Bool = false
+   // @Binding var image: CGImage?
+   // @State var isFlashOn: Bool = false
+    @State private var camera = CameraViewModel()
+
     var body: some View {
                 ZStack {
                     
-                    if let image = image {
+                    if let image = camera.currentFrame {
                         Image(image, scale: 1, label: Text("Camera feed"))
                             .resizable()
                             .scaledToFill() // Ensures the image fills any IOS screen
@@ -31,13 +33,16 @@ struct CameraView: View {
                             HStack(spacing: 250){
                                 
                                 Button(action:{
-                                    isFlashOn.toggle()
+                                    camera.toggleFlash()
                                 }){
-                                    if !isFlashOn{
-                                        Image(systemName: "bolt.slash").resizable().frame(width: 30, height: 30).foregroundStyle(Color.white)
-                                    } else{
-                                        Image(systemName: "bolt.fill").resizable().frame(width: 20, height: 30).foregroundStyle(Color.white)
-                                    }
+                                 
+                                    Image(systemName: camera.isFlashOn ? "bolt.fill" :  "bolt.slash")
+                                        .resizable()
+                                        .frame(width: camera.isFlashOn ? 20 :  30 , height: 30)
+                                        .foregroundStyle(Color.white)
+                                    //else{
+//                                        Image(systemName: "bolt.fill").resizable().frame(width: 20, height: 30).foregroundStyle(Color.white)
+//                                    }
                                     
                                     
                                 }
@@ -110,7 +115,8 @@ struct CameraView: View {
 
 
 #Preview {
-    CameraView(image: .constant(nil))
+    //CameraView(image: .constant(nil))
+    CameraView()
 }
 
 // Extension to make the UI Adaptive to All Screen Sizes
