@@ -7,7 +7,7 @@
 
 import SwiftData
 import SwiftUI
-struct Product: Identifiable {
+struct Item: Identifiable {
     var id = UUID()
 //    var name: String
 //    var companyName: String
