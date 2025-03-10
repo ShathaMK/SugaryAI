@@ -46,6 +46,11 @@
 			path = SugaryAI;
 			sourceTree = "<group>";
 		};
+		FC8F6C952D7F12EF0026BB70 /* New Folder */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = "New Folder";
+			sourceTree = "<group>";
+		};
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,6 +67,7 @@
 		581262592D706AFB0012670F = {
 			isa = PBXGroup;
 			children = (
+				FC8F6C952D7F12EF0026BB70 /* New Folder */,
 				585DD0EC2D7E6CC80036AEF6 /* Item.swift */,
 				586F14A22D79AD96009C68F6 /* CameraManager.swift */,
 				586F14A02D79AD63009C68F6 /* CMSampleBuffer+Extension.swift */,
@@ -99,6 +105,7 @@
 			);
 			fileSystemSynchronizedGroups = (
 				581262642D706AFB0012670F /* SugaryAI */,
+				FC8F6C952D7F12EF0026BB70 /* New Folder */,
 			);
 			name = SugaryAI;
 			packageProductDependencies = (
@@ -296,7 +303,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"SugaryAI/Preview Content\"";
-				DEVELOPMENT_TEAM = 5BDWVP493R;
+				DEVELOPMENT_TEAM = 39YZX5T634;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = SugaryAI/Info.plist;
@@ -328,7 +335,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"SugaryAI/Preview Content\"";
-				DEVELOPMENT_TEAM = 5BDWVP493R;
+				DEVELOPMENT_TEAM = 39YZX5T634;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = SugaryAI/Info.plist;
