@@ -23,8 +23,10 @@ class CameraManager: NSObject{
    // The media input from the capture device to capture session
    private var deviceInput: AVCaptureDeviceInput?
    
-   // object used to have acess ti video frames for processing
+   // object used to have acess to video frames for processing
    private var videoOutput: AVCaptureVideoDataOutput?
+   // object used to access photo output
+   private var photoOutput: AVCapturePhotoOutput?
    
    // object repersents the hardware or virtual capture device that can provide one or more streams of media of a particular type
   // private let systemPreferredCamera2 = AVCaptureDevice.Position.back
@@ -67,6 +69,8 @@ class CameraManager: NSObject{
        }
    }()
    
+    // MARK: - Intialization
+
    
    override init(){
        super.init()
@@ -82,7 +86,7 @@ class CameraManager: NSObject{
            
        }
    }
-   // configure the session to prepare the device
+   // MARK: - Session Configuration to prepare the device
    private func configureSession() async {
        
        // To check the user authorization if allowed camera is available and can take the device input
@@ -128,7 +132,7 @@ class CameraManager: NSObject{
        videoOutput.connection(with: .video)?.videoRotationAngle = 90
 
    }
-   // start the session to begin reciving data
+   // MARK: - Start the session to begin reciving data
    private func startSession() async {
        
        // Checks th authorization
@@ -149,7 +153,7 @@ class CameraManager: NSObject{
         guard connection.isVideoRotationAngleSupported(angle) else { return }
         connection.videoRotationAngle = angle
     }
-    // Function to turn the flash ON and OFF simply by tapping the flash icon
+    // MARK: - Function to turn the flash ON and OFF simply by tapping the flash icon
     func toggleFlash() {
         guard let device = AVCaptureDevice.default(for: .video) else {
             print("No video device available")

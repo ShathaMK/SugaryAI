@@ -9,14 +9,16 @@
 import Foundation
 import CoreImage
 import Observation
+import UIKit
 
 // To create a connection between CameraManger and CameraView
 // it publishes the changes to CameraView using the Observation framework it allows us to publish the current frame in real-time
 @Observable
-class CameraViewModel {
+class CameraViewModel: ObservableObject {
     // to track flash state if you want UI feedback
     var isFlashOn: Bool = false
     var currentFrame: CGImage?
+    var selectedImage: UIImage?
     private let cameraManager = CameraManager()
     init(){
         Task {
@@ -40,4 +42,4 @@ class CameraViewModel {
            // Optionally update the flash state here for UI feedback
            isFlashOn.toggle()
        }
-}
+}// end of CameraViewModel class
