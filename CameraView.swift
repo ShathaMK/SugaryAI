@@ -1,139 +1,207 @@
-//
-//  CameraView.swift
-//  SugaryAI
-//
-//  Created by Shatha Almukhaild on 06/09/1446 AH.
-//
-
-
-
 import SwiftUI
+import PhotosUI
+import Photos
 
 struct CameraView: View {
-   // @Binding var image: CGImage?
-   // @State var isFlashOn: Bool = false
     @State private var camera = CameraViewModel()
-
+    // optional because there is no selection by default
+    @State private var pickerItem: PhotosPickerItem?
+    @State private var showwPopUp: Bool = false
+    
     var body: some View {
-                ZStack {
-                    
-                    if let image = camera.currentFrame {
-                        Image(image, scale: 1, label: Text("Camera feed"))
-                            .resizable()
-                            .scaledToFill() // Ensures the image fills any IOS screen
-                            .frame(width: getScreenBounds().width, height: getScreenBounds().height)
-                            .clipped() // Prevents overflow
-                        
-                        
-                        // Color.black.ignoresSafeArea()
-                        
+        ZStack {
+            // 1. Background: Live camera feed
+            if let currentFrame = camera.currentFrame {
+                Image(currentFrame, scale: 1, label: Text("Camera feed"))
+                    .resizable()
+                    .scaledToFill()
+                    .frame(width: getScreenBounds().width, height: getScreenBounds().height)
+                    .clipped()
+            } else {
+                Color.black.ignoresSafeArea()
+                VStack {
+                    Image(systemName: "xmark.circle.fill")
+                        .resizable()
+                        .frame(width: 50, height: 50)
+                        .foregroundColor(.red)
+                    Text("No Camera Feed")
+                        .foregroundColor(.white)
+                        .bold()
+                }
+            }
+            
+            // 2. Overlay: Full-screen selected image
+            if let selected = camera.selectedImage {
+                Image(uiImage: selected)
+                    .resizable()
+                    .scaledToFill()
+                    .frame(width: getScreenBounds().width, height: getScreenBounds().height)
+                    .clipped()
+                    .transition(.opacity)
+                    .zIndex(1)
+                    .overlay(
                         VStack{
-                            
                             Spacer()
                             HStack(spacing: 250){
+                                Text("Cancel")
+                                    .opacity(0)
                                 
-                                Button(action:{
-                                    camera.toggleFlash()
-                                }){
-                                 
-                                    Image(systemName: camera.isFlashOn ? "bolt.fill" :  "bolt.slash")
-                                        .resizable()
-                                        .frame(width: camera.isFlashOn ? 20 :  30 , height: 30)
-                                        .foregroundStyle(Color.white)
-                                    //else{
-//                                        Image(systemName: "bolt.fill").resizable().frame(width: 20, height: 30).foregroundStyle(Color.white)
-//                                    }
-                                    
-                                    
-                                }
-                                Button(action:{}){
-                                    
-                                    ZStack{
-                                        Circle().fill(Color(hex:0x7B7B7B)).opacity(0.41).frame(width: 38, height: 38)
-                                        Image(systemName: "xmark").resizable().frame(width: 16,height: 16).foregroundStyle(Color.white)
-                                    }//End of ZStack
-                                }
-                            }// End of HStack
-                            Spacer()
-                            Spacer()
-                            Spacer()
-                            Spacer()
-                            Spacer()
-                            Spacer()
-                            Spacer()
-                            Spacer()
-                            Spacer()
-                            HStack(spacing:250){
-                                Button(action:{}){
-                                    Image(systemName: "info.circle.fill").resizable().frame(width: 35, height: 35).foregroundStyle(Color.white)
-                                }
-                                
-                                
-                                Button(action:{}){
-                                    
-                                    Image(systemName: "photo.on.rectangle.angled").resizable().frame(width: 40, height: 35).foregroundStyle(Color.white)
-                                }
-                                
-                            }
+                                //Spacer()
+                        Button(action: {
+                            withAnimation { camera.selectedImage = nil }
+                        }) {
                             
-                            HStack{
-                                Button(action:{}){
-                                    ZStack{
-                                        
+                        
+                                    ZStack {
                                         Circle()
-                                            .fill(Color(hex:0xD9D9D9))
-                                            .frame(width: 80, height: 80)
-                                        Circle()
-                                            .fill(Color(hex:0x838383))
-                                            .frame(width: 66, height: 66)
-                                        
+                                            .fill(Color(hex: 0x7B7B7B))
+                                            .opacity(0.41)
+                                            .frame(width: 38, height: 38)
+                                        Image(systemName: "xmark")
+                                            .resizable()
+                                            .frame(width: 16, height: 16)
+                                            .foregroundStyle(Color.white)
                                     }
                                     
-                                    
                                 }
+                         
+                        
+                                
                             }
                             Spacer()
-                            
-                        }//End of VStack
+                            Spacer()
+                            Spacer()
+                            Spacer()
+                            Spacer()
+                            Spacer()
+                            Spacer()
+                            Spacer()
+                            Spacer()
+                            Spacer()
+                            Spacer()
+                        }
+                        
+                    )
+            }
+            
+            // 3. Overlay: Camera UI Controls
+            VStack {
+                Spacer()
+                // Top controls (flash toggle and close button)
+                HStack(spacing: 250) {
+                    Button(action: {
+                        camera.toggleFlash()
+                    }) {
+                        Image(systemName: camera.isFlashOn ? "bolt.fill" : "bolt.slash")
+                            .resizable()
+                            .aspectRatio(contentMode: .fit) // Maintain proportions
+                                     .frame(width: 30, height: 30) // Ensure consistent size
+//                            .frame(width: camera.isFlashOn ? 20 : 30, height: 30)
+                            .foregroundStyle(Color.white)
                     }
-                  else {
-                       Color.black.ignoresSafeArea() // Black background when no image
-                       VStack {
-                           Image(systemName: "xmark.circle.fill")
-                               .resizable()
-                               .frame(width: 50, height: 50)
-                               .foregroundColor(.red)
-                           Text("No Camera Feed")
-                               .foregroundColor(.white)
-                               .bold()
-                       }
-                   }
-               }// End of ZStack
-               .ignoresSafeArea()
-          }// End of Body
-    }// End of Struct
-
+                    
+                    Button(action: {
+                        // Your action to dismiss the camera, if needed.
+                    }) {
+                        
+                        ZStack {
+                            Circle()
+                                .fill(Color(hex: 0x7B7B7B))
+                                .opacity(0.41)
+                                .frame(width: 38, height: 38)
+                            Image(systemName: "xmark")
+                                .resizable()
+                                .frame(width: 16, height: 16)
+                                .foregroundStyle(Color.white)
+                        }
+                    }
+                }
+             
+                Spacer()
+                Spacer()
+                Spacer()
+                Spacer()
+                Spacer()
+                Spacer()
+                Spacer()
+                Spacer()
+                Spacer()
+                // Bottom controls: Info button and Photo Picker button
+                HStack(spacing: 250) {
+                    Button(action: {
+                        // Action for camera instruction popup.
+                    }) {
+                        Image(systemName: "info.circle.fill")
+                            .resizable()
+                            .frame(width: 35, height: 35)
+                            .foregroundStyle(Color.white)
+                    }
+                    
+                    // Photo picker button always shows the icon.
+                    PhotosPicker(selection: $pickerItem, matching: .images) {
+                        Image(systemName: "photo.on.rectangle.angled")
+                            .resizable()
+                            .frame(width: 40, height: 35)
+                            .foregroundStyle(Color.white)
+                    }
+                    // To load the image from the library into the SwiftUI
+                    .onChange(of: pickerItem) {
+                        guard let pickerItem else { return }
+                         Task {
+                            do {
+                              if let data = try await pickerItem.loadTransferable(type: Data.self) {
+                   // Convert the data to a UIImage
+                              if let image = UIImage(data: data) {
+                              camera.selectedImage = image
+                                    }
+                                }
+                            } catch {
+                               print("Error loading image: \(error.localizedDescription)")
+                                               }
+                                           }
+                                       }
+                }
+                // Capture photo button
+                HStack {
+                    Button(action: {
+                       
+                    }) {
+                        ZStack {
+                            Circle()
+                                .fill(Color(hex: 0xD9D9D9))
+                                .frame(width: 80, height: 80)
+                            Circle()
+                                .fill(Color(hex: 0x838383))
+                                .frame(width: 66, height: 66)
+                        }
+                    }
+                }
+                Spacer()
+            }
+        }
+        .ignoresSafeArea()
+    }
+}
 
 #Preview {
-    //CameraView(image: .constant(nil))
     CameraView()
 }
 
-// Extension to make the UI Adaptive to All Screen Sizes
-extension View{
-   func getScreenBounds() -> CGRect{
-   return UIScreen.main.bounds
-   }
+// Extension for screen bounds
+extension View {
+    func getScreenBounds() -> CGRect {
+        UIScreen.main.bounds
+    }
 }
 
-// Extention to use hex for colors
+// Extension to use hex colors.
 extension Color {
     init(hex: UInt, alpha: Double = 1) {
         self.init(
             .sRGB,
             red: Double((hex >> 16) & 0xff) / 255,
-            green: Double((hex >> 08) & 0xff) / 255,
-            blue: Double((hex >> 00) & 0xff) / 255,
+            green: Double((hex >> 8) & 0xff) / 255,
+            blue: Double((hex >> 0) & 0xff) / 255,
             opacity: alpha
         )
     }
