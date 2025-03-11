@@ -7,6 +7,7 @@ struct CameraView: View {
     // optional because there is no selection by default
     @State private var pickerItem: PhotosPickerItem?
     @State private var showwPopUp: Bool = false
+    @State private var showPreview: Bool = false
     
     var body: some View {
         ZStack {
@@ -161,10 +162,12 @@ struct CameraView: View {
                                            }
                                        }
                 }
-                // Capture photo button
+                
+                //MARK: - Capture photo button
                 HStack {
                     Button(action: {
-                       
+                        camera.capturePhoto()
+                        showPreview = true
                     }) {
                         ZStack {
                             Circle()
@@ -177,9 +180,17 @@ struct CameraView: View {
                     }
                 }
                 Spacer()
+            } // end vstack camera view
+            
+        }// end big zstack
+        .ignoresSafeArea()
+        .fullScreenCover(isPresented: $showPreview) {
+            if let capturedImage = camera.capturedImage {
+                PhotoPreviewView(image: capturedImage, isPresented: $showPreview)
             }
         }
-        .ignoresSafeArea()
+        
+        
     }
 }
 

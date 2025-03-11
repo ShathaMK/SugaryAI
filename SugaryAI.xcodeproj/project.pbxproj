@@ -6,25 +6,8 @@
 	objectVersion = 77;
 	objects = {
 
-/* Begin PBXBuildFile section */
-		585DD0ED2D7E6CC80036AEF6 /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = 585DD0EC2D7E6CC80036AEF6 /* Item.swift */; };
-		586F14992D79AC86009C68F6 /* CameraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 586F14982D79AC86009C68F6 /* CameraView.swift */; };
-		586F149B2D79ACD3009C68F6 /* TestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 586F149A2D79ACD3009C68F6 /* TestView.swift */; };
-		586F149D2D79ACE7009C68F6 /* CameraViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 586F149C2D79ACE7009C68F6 /* CameraViewModel.swift */; };
-		586F149F2D79AD02009C68F6 /* CIImage+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 586F149E2D79AD02009C68F6 /* CIImage+Extension.swift */; };
-		586F14A12D79AD63009C68F6 /* CMSampleBuffer+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 586F14A02D79AD63009C68F6 /* CMSampleBuffer+Extension.swift */; };
-		586F14A32D79AD96009C68F6 /* CameraManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 586F14A22D79AD96009C68F6 /* CameraManager.swift */; };
-/* End PBXBuildFile section */
-
 /* Begin PBXFileReference section */
 		581262622D706AFB0012670F /* SugaryAI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SugaryAI.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		585DD0EC2D7E6CC80036AEF6 /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
-		586F14982D79AC86009C68F6 /* CameraView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraView.swift; sourceTree = "<group>"; };
-		586F149A2D79ACD3009C68F6 /* TestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestView.swift; sourceTree = "<group>"; };
-		586F149C2D79ACE7009C68F6 /* CameraViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraViewModel.swift; sourceTree = "<group>"; };
-		586F149E2D79AD02009C68F6 /* CIImage+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CIImage+Extension.swift"; sourceTree = "<group>"; };
-		586F14A02D79AD63009C68F6 /* CMSampleBuffer+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CMSampleBuffer+Extension.swift"; sourceTree = "<group>"; };
-		586F14A22D79AD96009C68F6 /* CameraManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -46,11 +29,6 @@
 			path = SugaryAI;
 			sourceTree = "<group>";
 		};
-		FC8F6C952D7F12EF0026BB70 /* New Folder */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			path = "New Folder";
-			sourceTree = "<group>";
-		};
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -67,14 +45,6 @@
 		581262592D706AFB0012670F = {
 			isa = PBXGroup;
 			children = (
-				FC8F6C952D7F12EF0026BB70 /* New Folder */,
-				585DD0EC2D7E6CC80036AEF6 /* Item.swift */,
-				586F14A22D79AD96009C68F6 /* CameraManager.swift */,
-				586F14A02D79AD63009C68F6 /* CMSampleBuffer+Extension.swift */,
-				586F149E2D79AD02009C68F6 /* CIImage+Extension.swift */,
-				586F149C2D79ACE7009C68F6 /* CameraViewModel.swift */,
-				586F149A2D79ACD3009C68F6 /* TestView.swift */,
-				586F14982D79AC86009C68F6 /* CameraView.swift */,
 				581262642D706AFB0012670F /* SugaryAI */,
 				581262632D706AFB0012670F /* Products */,
 			);
@@ -105,7 +75,6 @@
 			);
 			fileSystemSynchronizedGroups = (
 				581262642D706AFB0012670F /* SugaryAI */,
-				FC8F6C952D7F12EF0026BB70 /* New Folder */,
 			);
 			name = SugaryAI;
 			packageProductDependencies = (
@@ -163,13 +132,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				586F149B2D79ACD3009C68F6 /* TestView.swift in Sources */,
-				586F14992D79AC86009C68F6 /* CameraView.swift in Sources */,
-				586F14A32D79AD96009C68F6 /* CameraManager.swift in Sources */,
-				585DD0ED2D7E6CC80036AEF6 /* Item.swift in Sources */,
-				586F149D2D79ACE7009C68F6 /* CameraViewModel.swift in Sources */,
-				586F14A12D79AD63009C68F6 /* CMSampleBuffer+Extension.swift in Sources */,
-				586F149F2D79AD02009C68F6 /* CIImage+Extension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -19,7 +19,10 @@ class CameraViewModel: ObservableObject {
     var isFlashOn: Bool = false
     var currentFrame: CGImage?
     var selectedImage: UIImage?
+    var capturedImage: UIImage?
     private let cameraManager = CameraManager()
+    
+    
     init(){
         Task {
             await handleCameraPreview()
@@ -42,4 +45,17 @@ class CameraViewModel: ObservableObject {
            // Optionally update the flash state here for UI feedback
            isFlashOn.toggle()
        }
+    
+    
+    
+    func capturePhoto() { // Capture Photo Method
+        cameraManager.capturePhoto { image in
+            DispatchQueue.main.async {
+                self.capturedImage = image
+            }
+        }
+    }
+    
+    
+    
 }// end of CameraViewModel class
