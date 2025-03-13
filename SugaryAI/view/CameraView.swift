@@ -127,6 +127,7 @@ struct CameraView: View {
                 Spacer()
                 Spacer()
                 Spacer()
+                
                 // Bottom controls: Info button and Photo Picker button
                 HStack(spacing: 250) {
                     Button(action: {

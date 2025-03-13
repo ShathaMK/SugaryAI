@@ -48,7 +48,7 @@ struct PhotoPreviewView: View {
                     Spacer()
                     
                     Button(action: {
-                        print("Continue to next step") // Handle Next Step
+                        print("Use Photo") // Handle Next Step
                     }) {
                         Text("Continue")
                             .fontDesign(.rounded)

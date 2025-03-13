@@ -7,6 +7,7 @@
 
 import AVFoundation
 import CoreImage
+
 // convert CMSampleBuffer to CG Image enabling the implmentation of CaptureOutpout method
 extension CMSampleBuffer {
     var cgImage: CGImage? {
@@ -19,4 +20,17 @@ extension CMSampleBuffer {
         return CIImage(cvPixelBuffer: imagePixelBuffer).cgImage
     }
 }
+
  
+extension CIImage {
+    var cgImage: CGImage? {
+        let ciContext = CIContext()
+        guard let cgImage = ciContext.createCGImage(self, from: self.extent)
+        
+        else {
+            return nil
+        }
+        
+        return cgImage
+    }
+}
